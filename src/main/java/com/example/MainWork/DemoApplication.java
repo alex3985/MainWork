@@ -1,22 +1,16 @@
-package com.example.cource;
+package com.example.MainWork;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication
 public class DemoApplication {
 
 	@RequestMapping("/hello")
-String hello(Map<String, Object> model) {
-    RelativisticModel.select();
-    String energy = System.getenv().get("ENERGY");
-    if (energy == null) {
-       energy = "12 GeV";
-    }
-    Amount<Mass> m = Amount.valueOf(energy).to(KILOGRAM);
-    model.put("science", "E=mc^2: " + energy + " = "  + m.toString());
+       String hello() {
     return "hello";
-}
+    }
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
