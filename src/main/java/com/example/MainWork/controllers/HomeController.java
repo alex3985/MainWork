@@ -1,4 +1,4 @@
-package com.example.MainWork;
+package com.example.MainWork.controllers;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
