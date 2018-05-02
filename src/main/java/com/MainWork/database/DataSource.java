@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 @ComponentScan(basePackages = "com.MainWork.database")
 public class DataSource {
     @Bean
-    public BasicDataSource dataSource() throws URISyntaxException {
+    public BasicDataSource dataSource() throws URISyntaxException, ClassNotFoundException {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
         String username = dbUri.getUserInfo().split(":")[0];

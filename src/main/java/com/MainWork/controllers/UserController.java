@@ -10,7 +10,6 @@ public class UserController {
 
     @Autowired
     DataSource dataSource;
-
     @RequestMapping("/authorization")
     public Object Authorizathion (){
         return 25;
