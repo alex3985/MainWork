@@ -14,7 +14,7 @@ public class UserController {
     @RequestMapping("/authorization")
     public Object Authorizathion () throws SQLException, URISyntaxException, ClassNotFoundException {
         Coach coach = null;
-        DriverManager.register(new org.postgresql.Driver());
+        DriverManager.registerDriver(new org.postgresql.Driver());
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"Coach\"");
