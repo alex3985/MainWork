@@ -11,8 +11,8 @@ public class HomeController {
     @RequestMapping("/hello")
     public LinkedList<String> home(){
         LinkedList<String> a = new LinkedList<>();
-        a.add("asd");
-        a.add("werfg");
+        a.add("Влада");
+        a.add("Ракло");
         return a;
     }
 }
