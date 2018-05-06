@@ -10,13 +10,14 @@ public class Student {
     private String Phone;
     private int Id_Faculty;
 
-    public Student(int id, String name, String surname, String patronymic, String group, String sex, int id_Faculty) {
+    public Student(int id, String name, String surname, String patronymic, String group, String sex, String phone, int id_Faculty) {
         Id = id;
         Name = name;
         Surname = surname;
         Patronymic = patronymic;
         Group = group;
         Sex = sex;
+        Phone = phone;
         Id_Faculty = id_Faculty;
     }
 
