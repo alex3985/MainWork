@@ -1,6 +1,6 @@
 package com.MainWork.controllers;
 
-import com.MainWork.modules.authorization.Coach;
+import com.MainWork.modules.users.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -4,15 +4,14 @@ public class User {
     private int Id;
     private String Login;
     private String Password;
-    private String Type;
+
     private int Id_student;
     private int Id_coach;
 
-    public User(int id, String login, String password, String type, int id_student, int id_coach) {
+    public User(int id, String login, String password, int id_student, int id_coach) {
         Id = id;
         Login = login;
         Password = password;
-        Type = type;
         Id_student = id_student;
         Id_coach = id_coach;
     }
@@ -39,14 +38,6 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public void setType(String type) {
-        Type = type;
     }
 
     public int getId_student() {

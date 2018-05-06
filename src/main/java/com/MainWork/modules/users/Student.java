@@ -1,4 +1,4 @@
-package com.MainWork.modules.authorization;
+package com.MainWork.modules.users;
 
 public class Student {
     private int Id;
