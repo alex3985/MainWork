@@ -33,6 +33,8 @@ public class UserController {
                ResultSet rs2= stmt2.executeQuery();
                rs2.next();
                Coach coach = new Coach(rs2.getInt(1) , rs2.getString(2), rs2.getString(3), rs2.getString(4));
+               stmt2.close();
+               stmt.close();
                return coach;
             }else{
                 PreparedStatement stmt2 = dataSource.getConnection().prepareStatement("SELECT * FROM public.\"Student\" WHERE studentid=?");
@@ -41,9 +43,11 @@ public class UserController {
                 rs2.next();
                 Student student = new Student(rs2.getInt(1) , rs2.getString(2), rs2.getString(3), rs2.getString(4),
                         rs2.getString(5),rs2.getString(6),rs2.getString(7),rs2.getInt(8));
+                stmt2.close();
+                stmt.close();
                 return student;
             }
-        }return "ok";
+        }return null;
 
     }
 
