@@ -25,7 +25,7 @@ public class UserController {
         ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
             return new User(rs.getInt(1),null,null,rs.getInt(4),rs.getInt(5));
-        }return "ok";
+        }return "error";
     }
 
 }
