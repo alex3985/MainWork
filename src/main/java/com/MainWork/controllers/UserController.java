@@ -26,9 +26,11 @@ public class UserController {
         if(rs.next()) {
             User user =new User(rs.getInt(1),null,null,rs.getInt(4),rs.getInt(5));
             stmt.close();
+            dataSource.getConnection().close();
             return user;
         }
         stmt.close();
+        dataSource.getConnection().close();
         return "error";
     }
 

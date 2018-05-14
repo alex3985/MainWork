@@ -20,7 +20,6 @@ public class StudentController {
     @Autowired
     private DataSource dataSource;
 
-
     @RequestMapping("/")
     public LinkedList<Student> getAllStudent() throws SQLException {
         Statement stm = dataSource.getConnection().createStatement();
@@ -31,15 +30,19 @@ public class StudentController {
                     rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8)));
         }
         stm.close();
+        dataSource.getConnection().close();
         return students;
     }
 
     @RequestMapping("/getStudentById/{id}")
-    public Student getStrudentById(@PathVariable(value="id") int id) throws SQLException{
+    public Student getStudentById(@PathVariable(value="id") int id) throws SQLException{
         Statement stm = dataSource.getConnection().createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM public.\"Student\" WHERE studentid="+id);
         rs.next();
-        return new Student(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4),
+        Student student = new Student(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4),
                 rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
+        stm.close();
+        dataSource.getConnection().close();
+        return student;
     }
 }

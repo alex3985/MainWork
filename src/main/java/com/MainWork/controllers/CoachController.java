@@ -28,6 +28,7 @@ public class CoachController {
             coaches.add(new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4)));
         }
         stm.close();
+        dataSource.getConnection().close();
         return coaches;
     }
 
@@ -36,6 +37,9 @@ public class CoachController {
         Statement stm = dataSource.getConnection().createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM public.\"Coach\" WHERE coachid="+id);
         rs.next();
-        return new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4));
+        Coach coach = new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4));
+        stm.close();
+        dataSource.getConnection().close();
+        return coach;
     }
 }
