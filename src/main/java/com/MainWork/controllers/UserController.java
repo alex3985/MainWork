@@ -24,7 +24,7 @@ public class UserController {
         PreparedStatement stmt = dataSource.getConnection().prepareStatement("SELECT * FROM public.\"Users\" WHERE password="+"'{"+password+"}'"+" AND login="+"'{"+login+"}'");
         ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
-            User user =new User(rs.getInt(1),null,null,rs.getInt(4),rs.getInt(5));
+            User user =new User(rs.getInt(1),null,null,rs.getInt(5),rs.getInt(4));
             stmt.close();
             dataSource.getConnection().close();
             return user;
