@@ -25,10 +25,12 @@ public class SectionController {
                 " (SELECT sectionid FROM public.\"Journal\" WHERE studentid="+id+" )");
         if(rs.next()){
             String name = new String(rs.getString(1));
+            rs.close();
             stm.close();
             dataSource.getConnection().close();
             return name;
         }
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return "error";

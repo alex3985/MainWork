@@ -27,6 +27,7 @@ public class CoachController {
         while (rs.next()){
             coaches.add(new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4)));
         }
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return coaches;
@@ -38,6 +39,7 @@ public class CoachController {
         ResultSet rs = stm.executeQuery("SELECT * FROM public.\"Coach\" WHERE coachid="+id);
         rs.next();
         Coach coach = new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4));
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return coach;

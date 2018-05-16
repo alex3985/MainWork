@@ -25,6 +25,7 @@ public class ExamController {
         ResultSet rs = stm.executeQuery("SELECT name,measure,data FROM public.\"Standards\" INNER JOIN " +
                 "public.\"Exam\" ON standardid=standardid WHERE standardid="+id);
         if(!rs.next()){
+            rs.close();
             stm.close();
             dataSource.getConnection().close();
             return "error";
@@ -33,6 +34,7 @@ public class ExamController {
             do{
                 exam.add(new ResultOfExam(rs.getString(1),rs.getString(2),rs.getDouble(3)));
             }while (rs.next());
+            rs.close();
             stm.close();
             dataSource.getConnection().close();
             return exam;

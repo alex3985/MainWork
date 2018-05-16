@@ -29,6 +29,7 @@ public class StudentController {
             students.add(new Student(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4),
                     rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8)));
         }
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return students;
@@ -41,6 +42,7 @@ public class StudentController {
         rs.next();
         Student student = new Student(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4),
                 rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return student;
@@ -53,6 +55,7 @@ public class StudentController {
         rs.next();
         Student student = new Student(-1, rs.getString(1), rs.getString(2), rs.getString(3),
                 null,null,null,-1);
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return student;

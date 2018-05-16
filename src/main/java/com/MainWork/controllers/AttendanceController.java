@@ -23,10 +23,12 @@ public class AttendanceController {
         ResultSet rs = stm.executeQuery("SELECT attendance FROM public.\"Journal\" WHERE studentid="+id);
         if(rs.next()){
             int count = rs.getInt(1);
+            rs.close();
             stm.close();
             dataSource.getConnection().close();
             return count;
         }
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return "error";
@@ -39,10 +41,12 @@ public class AttendanceController {
         if(rs.next()){
             String lastdate;
             lastdate = new String(rs.getString(1));
+            rs.close();
             stm.close();
             dataSource.getConnection().close();
             return lastdate;
         }
+        rs.close();
         stm.close();
         dataSource.getConnection().close();
         return "error";

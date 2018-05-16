@@ -25,10 +25,12 @@ public class UserController {
         ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
             User user =new User(rs.getInt(1),null,null,rs.getInt(5),rs.getInt(4));
+            rs.close();
             stmt.close();
             dataSource.getConnection().close();
             return user;
         }
+        rs.close();
         stmt.close();
         dataSource.getConnection().close();
         return "error";
