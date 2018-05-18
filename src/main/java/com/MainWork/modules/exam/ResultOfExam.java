@@ -5,17 +5,15 @@ public class ResultOfExam {
     private String name;
     private String measure;
     private double result;
-    private double one;
     private double two;
     private double three;
     private double four;
     private double five;
 
-    public ResultOfExam(String name, String measure, double result, double one, double two, double three, double four, double five) {
+    public ResultOfExam(String name, String measure, double result, double two, double three, double four, double five) {
         this.name = name;
         this.measure = measure;
         this.result = result;
-        this.one = one;
         this.two = two;
         this.three = three;
         this.four = four;
@@ -44,14 +42,6 @@ public class ResultOfExam {
 
     public void setResult(double result) {
         this.result = result;
-    }
-
-    public double getOne() {
-        return one;
-    }
-
-    public void setOne(double one) {
-        this.one = one;
     }
 
     public double getTwo() {
