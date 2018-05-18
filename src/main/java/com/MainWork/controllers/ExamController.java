@@ -23,7 +23,7 @@ public class ExamController {
     public Object getExamsById(@PathVariable(value = "id") int id) throws SQLException {
         Statement stm = dataSource.getConnection().createStatement();
         ResultSet rs = stm.executeQuery("SELECT name,measure,\"1\",\"2\",\"3\",\"4\",\"5\",data FROM public.\"Standards\" INNER JOIN " +
-                "public.\"Exam\" ON public.\"Standards\".standardid=public.\"Exam\".standardid WHERE public.\"Standards\".standardid="+id);
+                "public.\"Exam\" ON public.\"Standards\".standardid=public.\"Exam\".standardid WHERE public.\"Standards\".standardid="+1);
         if(!rs.next()){
             rs.close();
             stm.close();
