@@ -5,11 +5,21 @@ public class ResultOfExam {
     private String name;
     private String measure;
     private double result;
+    private double one;
+    private double two;
+    private double three;
+    private double four;
+    private double five;
 
-    public ResultOfExam(String name, String measure, double result) {
+    public ResultOfExam(String name, String measure, double result, double one, double two, double three, double four, double five) {
         this.name = name;
         this.measure = measure;
         this.result = result;
+        this.one = one;
+        this.two = two;
+        this.three = three;
+        this.four = four;
+        this.five = five;
     }
 
     public String getName() {
@@ -34,5 +44,45 @@ public class ResultOfExam {
 
     public void setResult(double result) {
         this.result = result;
+    }
+
+    public double getOne() {
+        return one;
+    }
+
+    public void setOne(double one) {
+        this.one = one;
+    }
+
+    public double getTwo() {
+        return two;
+    }
+
+    public void setTwo(double two) {
+        this.two = two;
+    }
+
+    public double getThree() {
+        return three;
+    }
+
+    public void setThree(double three) {
+        this.three = three;
+    }
+
+    public double getFour() {
+        return four;
+    }
+
+    public void setFour(double four) {
+        this.four = four;
+    }
+
+    public double getFive() {
+        return five;
+    }
+
+    public void setFive(double five) {
+        this.five = five;
     }
 }
