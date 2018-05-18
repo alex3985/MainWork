@@ -22,8 +22,8 @@ public class ExamController {
     @RequestMapping("/student/{id}")
     public Object getExamsById(@PathVariable(value = "id") int id) throws SQLException {
         Statement stm = dataSource.getConnection().createStatement();
-        ResultSet rs = stm.executeQuery("SELECT name,measure,data FROM public.\"Standards\" INNER JOIN " +
-                "public.\"Exam\" ON standardid=standardid WHERE standardid="+id);
+        ResultSet rs = stm.executeQuery("SELECT name,measure,\"1\",\"2\",\"3\",\"4\",\"5\",data FROM public.\"Standards\" INNER JOIN " +
+                "public.\"Exam\" ON public.\"Standards\".standardid=public.\"Exam\".standardid WHERE public.\"Standards\".standardid="+id);
         if(!rs.next()){
             rs.close();
             stm.close();
