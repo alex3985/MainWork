@@ -51,7 +51,7 @@ public class StudentController {
     @RequestMapping("/initials/{id}")
     public Student getStudentNameById(@PathVariable(value="id") int id) throws SQLException{
         Statement stm = dataSource.getConnection().createStatement();
-        ResultSet rs = stm.executeQuery("SELECT name, surname,patronymic FROM public.student WHERE studentid="+id);
+        ResultSet rs = stm.executeQuery("SELECT name, surname, patronymic FROM public.student WHERE studentid="+id);
         rs.next();
         Student student = new Student(-1, rs.getString(1), rs.getString(2), rs.getString(3),
                 null,null,null,-1);
