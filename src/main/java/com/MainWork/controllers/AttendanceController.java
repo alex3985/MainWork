@@ -37,7 +37,7 @@ public class AttendanceController {
     @RequestMapping("/student/lastDate/{id}")
     public Object getLastDateById(@PathVariable(value="id") int id) throws SQLException {
         Statement stm = dataSource.getConnection().createStatement();
-        ResultSet rs = stm.executeQuery("SELECT lastdate FROM public.\"Journal\" WHERE studentid="+id);
+        ResultSet rs = stm.executeQuery("SELECT lastdate FROM public.journal WHERE studentid="+id);
         if(rs.next()){
             String lastdate;
             lastdate = new String(rs.getString(1));
