@@ -21,7 +21,7 @@ public class MainCong{
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
         basicDataSource.setMaxIdle(0);
-        basicDataSource.setInitialSize(2);
+        basicDataSource.setInitialSize(0);
         basicDataSource.setMinIdle(0);
         return basicDataSource;
     }
