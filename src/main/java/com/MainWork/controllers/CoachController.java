@@ -22,7 +22,7 @@ public class CoachController {
     @RequestMapping("/")
     public LinkedList<Coach> getAllCoaches () throws SQLException{
         Statement stm = dataSource.getConnection().createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM public.\"Coach\" ");
+        ResultSet rs = stm.executeQuery("SELECT * FROM public.coach ");
         LinkedList<Coach> coaches = new LinkedList<>();
         while (rs.next()){
             coaches.add(new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4)));
@@ -36,7 +36,7 @@ public class CoachController {
     @RequestMapping("/getCoachById{id}")
     public Coach getStrudentById(@PathVariable(value="id") int id) throws SQLException{
         Statement stm = dataSource.getConnection().createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM public.\"Coach\" WHERE coachid="+id);
+        ResultSet rs = stm.executeQuery("SELECT * FROM public.coach WHERE coachid="+id);
         rs.next();
         Coach coach = new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4));
         rs.close();

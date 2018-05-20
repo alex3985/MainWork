@@ -21,8 +21,8 @@ public class SectionController {
     @RequestMapping("/student/{id}")
     public String getSectionByIdStudent(@PathVariable(value="id") int id) throws SQLException {
         Statement stm = dataSource.getConnection().createStatement();
-        ResultSet rs = stm.executeQuery("SELECT name FROM public.\"Section\" WHERE sectionid IN" +
-                " (SELECT sectionid FROM public.\"Journal\" WHERE studentid="+id+" )");
+        ResultSet rs = stm.executeQuery("SELECT name FROM public.section WHERE sectionid IN" +
+                " (SELECT sectionid FROM public.journal WHERE studentid="+id+" )");
         if(rs.next()){
             String name = new String(rs.getString(1));
             rs.close();

@@ -20,7 +20,7 @@ public class AttendanceController {
     @RequestMapping("/student/count/{id}")
     public Object getAttendanceById(@PathVariable(value="id") int id) throws SQLException {
         Statement stm = dataSource.getConnection().createStatement();
-        ResultSet rs = stm.executeQuery("SELECT attendance FROM public.\"Journal\" WHERE studentid="+id);
+        ResultSet rs = stm.executeQuery("SELECT attendance FROM public.journal WHERE studentid="+id);
         if(rs.next()){
             int count = rs.getInt(1);
             rs.close();

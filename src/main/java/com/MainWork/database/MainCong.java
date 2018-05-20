@@ -12,9 +12,9 @@ public class MainCong{
     @Bean
     public static BasicDataSource dataSource() throws ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
-        String username = "zokdoohqjgdgqh";
-        String password = "4cec923b9ae69cee7a9f41a9cec6afc51685d6324f57cf7d9ff7c596d0c1405b";
-        String dbUrl = "jdbc:postgresql://ec2-54-247-89-189.eu-west-1.compute.amazonaws.com:5432/db7vd0hkpm8872?sslmode=require";
+        String username = "icggyrbzbeuocq";
+        String password = "2c6b5d661e938f43320bfe20a805ff94be5509cb0b9e7cf2f41e467163ff7689";
+        String dbUrl = "jdbc:postgresql://ec2-54-75-239-237.eu-west-1.compute.amazonaws.com:5432/dfgqskbforn93?sslmode=require";
 
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(dbUrl);
