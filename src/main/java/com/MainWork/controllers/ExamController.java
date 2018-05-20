@@ -32,8 +32,8 @@ public class ExamController {
         }else{
             LinkedList<ResultOfExam> exam = new LinkedList<>();
             do{
-                exam.add(new ResultOfExam(rs.getString(1),rs.getString(2),rs.getDouble(3),rs.getDouble(4),
-                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8)));
+                exam.add(new ResultOfExam(rs.getString(1),rs.getString(2),rs.getDouble(7),rs.getDouble(4),
+                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(3)));
             }while (rs.next());
             rs.close();
             stm.close();
