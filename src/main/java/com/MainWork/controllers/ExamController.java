@@ -38,7 +38,9 @@ public class ExamController {
             rs.close();
             stm.close();
             dataSource.getConnection().close();
+            if(dataSource.getConnection().isClosed())
             return exam;
+            return "error";
         }
     }
 }
