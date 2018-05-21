@@ -23,7 +23,7 @@ public class MainCong{
         basicDataSource.setMinEvictableIdleTimeMillis(500);
         basicDataSource.setMinIdle(0);
         basicDataSource.setTimeBetweenEvictionRunsMillis(500);
-        basicDataSource.setMaxIdle(12);
+        basicDataSource.setMaxIdle(0);
         return basicDataSource;
     }
 
