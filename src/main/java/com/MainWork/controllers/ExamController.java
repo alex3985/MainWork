@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,13 +22,14 @@ public class ExamController {
 
     @RequestMapping("/student/{id}")
     public Object getExamsById(@PathVariable(value = "id") int id) throws SQLException {
-        Statement stm = dataSource.getConnection().createStatement();
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT name,measure,five,two,three,four,data FROM public.standards INNER JOIN " +
                 "public.exam ON public.standards.standardid=public.exam.standardid WHERE public.exam.studentid="+id);
         if(!rs.next()){
             rs.close();
             stm.close();
-            dataSource.getConnection().close();
+            con.close();
             return "error";
         }else{
             LinkedList<ResultOfExam> exam = new LinkedList<>();
@@ -37,10 +39,8 @@ public class ExamController {
             }while (rs.next());
             rs.close();
             stm.close();
-            dataSource.getConnection().close();
-            if(dataSource.getConnection().isClosed())
+            con.close();
             return exam;
-            return "error";
         }
     }
 }

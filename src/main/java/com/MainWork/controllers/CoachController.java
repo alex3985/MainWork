@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +22,8 @@ public class CoachController {
 
     @RequestMapping("/")
     public LinkedList<Coach> getAllCoaches () throws SQLException{
-        Statement stm = dataSource.getConnection().createStatement();
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM public.coach ");
         LinkedList<Coach> coaches = new LinkedList<>();
         while (rs.next()){
@@ -29,19 +31,20 @@ public class CoachController {
         }
         rs.close();
         stm.close();
-        dataSource.getConnection().close();
+        con.close();
         return coaches;
     }
 
     @RequestMapping("/getCoachById{id}")
     public Coach getStrudentById(@PathVariable(value="id") int id) throws SQLException{
-        Statement stm = dataSource.getConnection().createStatement();
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM public.coach WHERE coachid="+id);
         rs.next();
         Coach coach = new Coach(rs.getInt(1) , rs.getString(2), rs.getString(3), rs.getString(4));
         rs.close();
         stm.close();
-        dataSource.getConnection().close();
+        con.close();
         return coach;
     }
 }
