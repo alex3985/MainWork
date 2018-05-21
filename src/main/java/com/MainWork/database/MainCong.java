@@ -20,9 +20,7 @@ public class MainCong{
         basicDataSource.setUrl(dbUrl);
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
-        basicDataSource.setMaxIdle(0);
-        basicDataSource.setInitialSize(0);
-        basicDataSource.setMinIdle(0);
+        basicDataSource.setMinEvictableIdleTimeMillis(1000);
         return basicDataSource;
     }
 
