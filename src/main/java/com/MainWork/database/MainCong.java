@@ -21,6 +21,7 @@ public class MainCong{
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
         basicDataSource.setMinEvictableIdleTimeMillis(1000);
+        basicDataSource.setMinIdle(12);
         return basicDataSource;
     }
 
