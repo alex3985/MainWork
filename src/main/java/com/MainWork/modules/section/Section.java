@@ -1,12 +1,12 @@
 package com.MainWork.modules.section;
 
-public class SectionWithCoach {
+public class Section {
     private String section;
     private String name;
     private String surname;
     private String patronomic;
 
-    public SectionWithCoach(String section, String name, String surname, String patronomic) {
+    public Section(String section, String name, String surname, String patronomic) {
         this.section = section;
         this.name = name;
         this.surname = surname;
