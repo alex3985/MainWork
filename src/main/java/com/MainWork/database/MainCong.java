@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class MainCong{
 
     @Bean
-    public static BasicDataSource dataSource() throws ClassNotFoundException {
+    public BasicDataSource dataSource() throws ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
         String username = "icggyrbzbeuocq";
         String password = "2c6b5d661e938f43320bfe20a805ff94be5509cb0b9e7cf2f41e467163ff7689";
