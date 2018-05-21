@@ -20,8 +20,10 @@ public class MainCong{
         basicDataSource.setUrl(dbUrl);
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
-        basicDataSource.setMinEvictableIdleTimeMillis(1000);
-        basicDataSource.setMinIdle(12);
+        basicDataSource.setMinEvictableIdleTimeMillis(500);
+        basicDataSource.setMinIdle(0);
+        basicDataSource.setTimeBetweenEvictionRunsMillis(500);
+        basicDataSource.setMaxIdle(12);
         return basicDataSource;
     }
 
