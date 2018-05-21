@@ -65,7 +65,7 @@ public class CoachController {
             LinkedList<StudentForTableCoach> stud =new LinkedList<>();
             do{
                 stud.add(new StudentForTableCoach(rs.getInt(1),rs.getInt(2),rs.getString(3)+" "+rs.getString(4)+" "+
-                rs.getString(5),rs.getNString(6),rs.getString(7),rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11)));
+                rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11)));
             }while (rs.next());
             rs.close();
             stm.close();
