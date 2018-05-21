@@ -1,6 +1,6 @@
 package com.MainWork.controllers;
 
-import com.MainWork.modules.users.Student;
+import com.MainWork.modules.section.SectionWithCoach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,21 +20,23 @@ public class SectionController {
     private DataSource dataSource;
 
     @RequestMapping("/student/{id}")
-    public String getSectionByIdStudent(@PathVariable(value="id") int id) throws SQLException {
+    public Object getSectionByIdStudent(@PathVariable(value="id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT name FROM public.section WHERE sectionid IN" +
+        ResultSet rs = stm.executeQuery("SELECT section.name,coach.name,surname, patronomic FROM public.section INNER JOIN public.coach ON public.coach.coachid=public.section.coachid WHERE sectionid IN" +
                 " (SELECT sectionid FROM public.journal WHERE studentid="+id+" )");
         if(rs.next()){
-            String name = new String(rs.getString(1));
+            SectionWithCoach sectionWithCoach  = new SectionWithCoach(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
             rs.close();
             stm.close();
             con.close();
-            return name;
+            return secionWithCoach;
         }
         rs.close();
         stm.close();
         con.close();
         return "error";
     }
+
+
 }
