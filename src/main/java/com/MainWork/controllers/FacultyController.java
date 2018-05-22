@@ -19,7 +19,7 @@ public class FacultyController {
     @Autowired
     private DataSource dataSource;
 
-    @RequestMapping(/)
+    @RequestMapping("/")
     public Object getAllFaculties() throws SQLException{
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
