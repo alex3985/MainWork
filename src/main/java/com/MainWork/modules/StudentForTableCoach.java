@@ -1,7 +1,7 @@
 package com.MainWork.modules;
 
 public class StudentForTableCoach {
-    private int id_studnet;
+    private int id_student;
     private int id_faculty;
     private String initials;
     private String faculty;
@@ -11,8 +11,8 @@ public class StudentForTableCoach {
     private String phone;
     private String sex;
 
-    public StudentForTableCoach(int id_studnet, int id_faculty, String initials, String faculty, String group, int attendance, String lastdate, String phone, String sex) {
-        this.id_studnet = id_studnet;
+    public StudentForTableCoach(int id_student, int id_faculty, String initials, String faculty, String group, int attendance, String lastdate, String phone, String sex) {
+        this.id_student = id_student;
         this.id_faculty = id_faculty;
         this.initials = initials;
         this.faculty = faculty;
@@ -24,11 +24,11 @@ public class StudentForTableCoach {
     }
 
     public int getId_studnet() {
-        return id_studnet;
+        return id_student;
     }
 
     public void setId_studnet(int id_studnet) {
-        this.id_studnet = id_studnet;
+        this.id_student = id_studnet;
     }
 
     public int getId_faculty() {
