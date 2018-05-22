@@ -23,11 +23,11 @@ public class StudentForTableCoach {
         this.sex = sex;
     }
 
-    public int getId_studnet() {
+    public int getId_student() {
         return id_student;
     }
 
-    public void setId_studnet(int id_studnet) {
+    public void setId_student(int id_studnet) {
         this.id_student = id_studnet;
     }
 
