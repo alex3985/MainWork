@@ -65,7 +65,7 @@ public class StudentController {
         return student;
     }
 
-    @RequestMapping("/insurt/{facultyid}/{name}/{surname}/{patronymic}/{grou}/{sex}/{phone}")
+    @RequestMapping("/insert/{facultyid}/{name}/{surname}/{patronymic}/{grou}/{sex}/{phone}")
     public String insert(@PathVariable(value = "facultyid") int facultyid,@PathVariable(value = "name") String name,
                          @PathVariable(value = "surname") String surname,@PathVariable(value = "patronymic") String patronymic,
                          @PathVariable(value = "grou") String gruo,@PathVariable(value = "sex") String sex,
