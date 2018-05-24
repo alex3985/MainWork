@@ -6,6 +6,7 @@ import com.MainWork.modules.users.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
@@ -17,7 +18,6 @@ public class UserController {
 
     @Autowired
     private DataSource dataSource;
-
 
     @RequestMapping("/authorization/{login}/{password}")
     public Object Authorizathion (@PathVariable(value = "login") String login,@PathVariable(value = "password") String password) throws SQLException, ClassNotFoundException {

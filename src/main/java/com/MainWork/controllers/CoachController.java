@@ -53,7 +53,7 @@ public class CoachController {
     public Object getCoachesSrudentsById(@PathVariable(value = "id") int id) throws SQLException{
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT journal.studentid,journal.facultyid,surname,student.name,student.patronymic,public.\"Faculty\".name,student.group," +
+        ResultSet rs = stm.executeQuery("SELECT journal.studentid,journal.facultyid,surname,student.name,student.patronymic,public.\"Faculty\".name,student.grou," +
                 "attendance,lastdate,student.phone,student.sex FROM journal INNER JOIN (public.student INNER JOIN public.\"Faculty\"" +
                 " ON student.facultyid=public.\"Faculty\".facultyid) ON journal.sectionid=student.studentid WHERE coachid="+id);
         if(!rs.next()){
@@ -62,7 +62,7 @@ public class CoachController {
            con.close();
            return "error";
         }else{
-            LinkedList<StudentForTableCoach> stud =new LinkedList<>();
+            LinkedList<StudentForTableCoach> stud = new LinkedList<>();
             do{
                 stud.add(new StudentForTableCoach(rs.getInt(1),rs.getInt(2),rs.getString(3)+" "+rs.getString(4)+" "+
                 rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11)));
