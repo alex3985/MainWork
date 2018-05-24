@@ -65,18 +65,18 @@ public class StudentController {
         return student;
     }
 
-    @RequestMapping("/insert/{faculty}/{name}/{surname}/{patronymic}/{grou}/{sex}/{phone}")
-    public String insertStudent(@PathVariable(value = "faculty") int faculty,@PathVariable(value = "name") String name,
+    @RequestMapping("/insert/{faculty}/{namestd}/{surname}/{patronymic}/{grou}/{sex}/{phone}")
+    public String insertStudent(@PathVariable(value = "faculty") int faculty,@PathVariable(value = "namestd") String namestd,
                          @PathVariable(value = "surname") String surname,@PathVariable(value = "patronymic") String patronymic,
                          @PathVariable(value = "grou") String grou,@PathVariable(value = "sex") String sex,
                          @PathVariable(value = "phone") String phone) throws SQLException {
-        if(faculty<0||name.equals("")||surname.equals("")||patronymic.equals("")||grou.equals("")||sex.equals(""))
+        if(faculty<0||namestd.equals("")||surname.equals("")||patronymic.equals("")||grou.equals("")||sex.equals(""))
         {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT public.insert_student("+faculty+","+name+","+surname+","+patronymic+","+grou+","+sex+
+            ResultSet rs = stm.executeQuery("SELECT public.insert_student("+faculty+","+namestd+","+surname+","+patronymic+","+grou+","+sex+
             ","+phone+")");
             rs.next();
             rs.close();
@@ -96,10 +96,11 @@ public class StudentController {
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT delete_student("+id+")");
             rs.next();
+            String massage=rs.getString(1);
             rs.close();
             stm.close();
             con.close();
-            return rs.getString(1);
+            return massage ;
         }
     }
 }
