@@ -77,7 +77,24 @@ public class StudentController {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT insert_student("+facultyid+","+name+","+surname+","+patronymic+","+gruo+","+sex+
-            ","+phone);
+            ","+phone+")");
+            rs.next();
+            rs.close();
+            stm.close();
+            con.close();
+            return rs.getString(1);
+        }
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String insert(@PathVariable(value = "id") int id) throws SQLException {
+        if(id<0)
+        {
+            return "error";
+        }else{
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT delete_student("+id+")");
             rs.next();
             rs.close();
             stm.close();
