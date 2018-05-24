@@ -68,15 +68,15 @@ public class StudentController {
     @RequestMapping("/insert/{facultyid}/{name}/{surname}/{patronymic}/{grou}/{sex}/{phone}")
     public String insert(@PathVariable(value = "facultyid") int facultyid,@PathVariable(value = "name") String name,
                          @PathVariable(value = "surname") String surname,@PathVariable(value = "patronymic") String patronymic,
-                         @PathVariable(value = "grou") String gruo,@PathVariable(value = "sex") String sex,
+                         @PathVariable(value = "grou") String grou,@PathVariable(value = "sex") String sex,
                          @PathVariable(value = "phone") String phone) throws SQLException {
-        if(facultyid<0||name.equals("")||surname.equals("")||patronymic.equals("")||gruo.equals("")||sex.equals(""))
+        if(facultyid<0||name.equals("")||surname.equals("")||patronymic.equals("")||grou.equals("")||sex.equals(""))
         {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_student("+facultyid+","+name+","+surname+","+patronymic+","+gruo+","+sex+
+            ResultSet rs = stm.executeQuery("SELECT insert_student("+facultyid+","+name+","+surname+","+patronymic+","+grou+","+sex+
             ","+phone+")");
             rs.next();
             rs.close();
