@@ -66,7 +66,7 @@ public class StudentController {
     }
 
     @RequestMapping("/insert/{faculty}/{name}/{surname}/{patronymic}/{grou}/{sex}/{phone}")
-    public String insert(@PathVariable(value = "faculty") int faculty,@PathVariable(value = "name") String name,
+    public String insertStudent(@PathVariable(value = "faculty") int faculty,@PathVariable(value = "name") String name,
                          @PathVariable(value = "surname") String surname,@PathVariable(value = "patronymic") String patronymic,
                          @PathVariable(value = "grou") String grou,@PathVariable(value = "sex") String sex,
                          @PathVariable(value = "phone") String phone) throws SQLException {
@@ -76,7 +76,7 @@ public class StudentController {
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_student("+faculty+","+name+","+surname+","+patronymic+","+grou+","+sex+
+            ResultSet rs = stm.executeQuery("SELECT public.insert_student("+faculty+","+name+","+surname+","+patronymic+","+grou+","+sex+
             ","+phone+")");
             rs.next();
             rs.close();
@@ -87,7 +87,7 @@ public class StudentController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String insert(@PathVariable(value = "id") int id) throws SQLException {
+    public String deleteStudent(@PathVariable(value = "id") int id) throws SQLException {
         if(id<0)
         {
             return "error";
