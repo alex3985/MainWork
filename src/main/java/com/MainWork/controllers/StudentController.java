@@ -70,10 +70,10 @@ public class StudentController {
                          @PathVariable(value = "surname") String surname,@PathVariable(value = "patronymic") String patronymic,
                          @PathVariable(value = "group") String group,@PathVariable(value = "sex") String sex,
                          @PathVariable(value = "phone") String phone) throws SQLException {
-        if(faculty<0||namestd.equals("")||surname.equals("")||patronymic.equals("")||group.equals("")||sex.equals(""))
-        {
+       // if(faculty<0||namestd.equals("")||surname.equals("")||patronymic.equals("")||group.equals("")||sex.equals(""))
+      //  {
             return "error";
-        }else{
+       /* }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT public.insert_student("+faculty+",'"+namestd+"','"+surname+"','"+patronymic+"','"+group+"','"+sex+
@@ -83,7 +83,7 @@ public class StudentController {
             stm.close();
             con.close();
             return rs.getString(1);
-        }
+        }*/
     }
 
     @RequestMapping("/delete/{id}")
