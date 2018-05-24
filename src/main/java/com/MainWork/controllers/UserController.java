@@ -21,18 +21,19 @@ public class UserController {
 
     @RequestMapping("/authorization/{login}/{password}")
     public Object Authorizathion (@PathVariable(value = "login") String login,@PathVariable(value = "password") String password) throws SQLException, ClassNotFoundException {
-        PreparedStatement stmt = dataSource.getConnection().prepareStatement("SELECT * FROM public.users WHERE password="+"'"+password+"' AND login="+"'"+login+"'");
+        Connection con =dataSource.getConnection();
+        PreparedStatement stmt = con.prepareStatement("SELECT * FROM public.users WHERE password="+"'"+password+"' AND login="+"'"+login+"'");
         ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
             User user =new User(rs.getInt(1),null,null,rs.getInt(4),rs.getInt(5));
             rs.close();
             stmt.close();
-            dataSource.getConnection().close();
+            con.close();
             return user;
         }
         rs.close();
         stmt.close();
-        dataSource.getConnection().close();
+        con.close();
         return "error";
     }
 
