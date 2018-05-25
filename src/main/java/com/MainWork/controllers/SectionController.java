@@ -39,5 +39,24 @@ public class SectionController {
         return "error";
     }
 
+    @RequestMapping("/coach/{id}")
+    public Object getSectionbyCoachid(@PathVariable(value = "id") int id) throws SQLException {
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("SELECT section.name FROM public.section WHERE coachid"+id+" )");
+        if(rs.next()){
+            int section = rs.getInt(1);
+            rs.close();
+            stm.close();
+            con.close();
+            return section;
+        }
+        rs.close();
+        stm.close();
+        con.close();
+        return "error";
+
+    }
+
 
 }
