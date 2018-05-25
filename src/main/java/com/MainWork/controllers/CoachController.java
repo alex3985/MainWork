@@ -55,7 +55,7 @@ public class CoachController {
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT journal.studentid,journal.facultyid,surname,student.name,student.patronymic,public.\"Faculty\".name,student.grou," +
                 "attendance,lastdate,student.phone,student.sex FROM journal INNER JOIN (public.student INNER JOIN public.\"Faculty\"" +
-                " ON student.facultyid=public.\"Faculty\".facultyid) ON journal.sectionid=student.studentid WHERE coachid="+id);
+                " ON student.facultyid=public.\"Faculty\".facultyid) ON journal.studentid=student.studentid WHERE coachid="+id);
         if(!rs.next()){
            rs.close();
            stm.close();
