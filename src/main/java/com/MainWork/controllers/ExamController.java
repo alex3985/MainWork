@@ -44,7 +44,7 @@ public class ExamController {
         }
     }
 
-    @RequestMapping("/coach/{studentid}/{standardid}/{data}")
+    @RequestMapping("/coach/insert/{studentid}/{standardid}/{data}")
     public String insertExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid,
                              @PathVariable(value = "data") double data) throws SQLException {
         if (studentid < 0||standardid<0||data<0) {
@@ -68,7 +68,7 @@ public class ExamController {
         }
     }
 
-    @RequestMapping("/coach/{studentid}/{standardid}/{data}")
+    @RequestMapping("/coach/update/{studentid}/{standardid}/{data}")
     public String updateExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid,
                              @PathVariable(value = "data") double data) throws SQLException {
         if (studentid < 0||standardid<0||data<0) {
@@ -92,7 +92,7 @@ public class ExamController {
         }
     }
 
-    @RequestMapping("/coach/{studentid}/{standardid}")
+    @RequestMapping("/coach/delete/{studentid}/{standardid}")
     public String insertExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid) throws SQLException {
         if (studentid < 0||standardid<0) {
             return "error";
