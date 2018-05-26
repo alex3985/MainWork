@@ -93,13 +93,13 @@ public class ExamController {
     }
 
     @RequestMapping("/coach/delete/{studentid}/{standardid}")
-    public String insertExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid) throws SQLException {
+    public String deleteExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid) throws SQLException {
         if (studentid < 0||standardid<0) {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_exam("+studentid+","+standardid+")");
+            ResultSet rs = stm.executeQuery("SELECT delete_exam("+studentid+","+standardid+")");
             if(rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));

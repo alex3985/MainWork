@@ -24,7 +24,7 @@ public class StandardsController {
     public Object getStundardsBySex(@PathVariable(value = "sex") String sex,@PathVariable(value = "id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT public.standards.standardid,name,one,two,three,four,five,measure FROM public.standards LEFT JOIN exam ON  public.standards.standardid!=exam.standardid WHERE sex='"+sex+"' AND studentid!="+id);
+        ResultSet rs = stm.executeQuery("SELECT public.standards.standardid,name,one,two,three,four,five,measure FROM public.standards WHERE sex='"+sex+"' AND NOT standardid IN (SELECT exam.standardid FROM exam WHERE exam.standardid="+id);
         if(!rs.next()){
             rs.close();
             stm.close();
