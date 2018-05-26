@@ -20,11 +20,11 @@ public class StandardsController {
     @Autowired
     private DataSource dataSource;
 
-    @RequestMapping("/student/{sex}")
-    public Object getStundardsBySex(@PathVariable(value = "sex") String sex) throws SQLException {
+    @RequestMapping("/student/{sex}/{id}")
+    public Object getStundardsBySex(@PathVariable(value = "sex") String sex,@PathVariable(value = "id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM public.standards WHERE sex='"+sex+"'");
+        ResultSet rs = stm.executeQuery("SELECT public.standards.standardid,name,one,two,three,four,five,measure FROM public.standards LEFT JOIN exam ON  public.standards.standardid!=exam.standardid WHERE sex='"+sex+"' AND studentid!="+id);
         if(!rs.next()){
             rs.close();
             stm.close();
