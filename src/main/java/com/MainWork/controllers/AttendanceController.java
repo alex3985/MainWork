@@ -57,7 +57,7 @@ public class AttendanceController {
 
     @RequestMapping("/coach/update/{id}/{count}/{lastdate}")
     public Object updateAttendance(@PathVariable(value = "id") int id,@PathVariable(value = "count") int count,@PathVariable(value = "lastdate") String lastdate) throws SQLException {
-        if (id < 0 || (count < 0 || count > 80) ||lastdate.equals("")||!lastdate.matches("[0-9]+-[0-9]+-[0-9]+")) {
+        if (id < 0 || (count < 0 || count > 80) ||lastdate.equals("")||!lastdate.matches("[0-9]+\\.[0-9]+\\.[0-9]+")) {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
