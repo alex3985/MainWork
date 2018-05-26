@@ -73,7 +73,7 @@ public class StudentController {
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT public.insert_student1("+faculty+","+coachid+","+sectionid+",'"+namestd+"','"+surname+"','"+patronymic+"','"+group+"','"+sex+
+            ResultSet rs = stm.executeQuery("SELECT public.insert_student("+faculty+","+coachid+","+sectionid+",'"+namestd+"','"+surname+"','"+patronymic+"','"+group+"','"+sex+
             "','"+phone+"')");
             rs.next();
             String massage = rs.getString(1);

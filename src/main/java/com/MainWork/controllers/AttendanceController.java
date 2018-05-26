@@ -55,4 +55,26 @@ public class AttendanceController {
         return "error";
     }
 
+    @RequestMapping("/coach/update/{id}/{count}/{lastdate}")
+    public Object updateAttendance(@PathVariable(value = "id") int id,@PathVariable(value = "count") int count,@PathVariable(value = "lastdate") String lastdate) throws SQLException {
+        if (id < 0 || (count < 0 || count > 80) ||lastdate.equals("")||!lastdate.matches("[0-9]+\\.[0-9]+\\.[0-9]+")) {
+            return "error";
+        }else{
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT update_attendance("+id+","+count+",'"+lastdate+"')");
+            if(rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
 }

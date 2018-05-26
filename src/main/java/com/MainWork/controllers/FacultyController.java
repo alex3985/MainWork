@@ -31,6 +31,9 @@ public class FacultyController {
             do{
                 faculties.add(new Faculty(rs.getInt(1),rs.getString(2)));
             }while(rs.next());
+            rs.close();
+            stm.close();
+            con.close();
             return faculties;
         }
     }
