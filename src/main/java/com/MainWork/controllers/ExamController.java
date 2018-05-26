@@ -43,4 +43,75 @@ public class ExamController {
             return exam;
         }
     }
+
+    @RequestMapping("/coach/{studentid}/{standardid}/{data}")
+    public String insertExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid,
+                             @PathVariable(value = "data") double data) throws SQLException {
+        if (studentid < 0||standardid<0||data<0) {
+            return "error";
+        }else{
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT insert_exam("+studentid+","+standardid+","+data+")");
+            if(rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
+
+    @RequestMapping("/coach/{studentid}/{standardid}/{data}")
+    public String updateExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid,
+                             @PathVariable(value = "data") double data) throws SQLException {
+        if (studentid < 0||standardid<0||data<0) {
+            return "error";
+        }else{
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT update_exam("+studentid+","+standardid+","+data+")");
+            if(rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
+
+    @RequestMapping("/coach/{studentid}/{standardid}")
+    public String insertExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid) throws SQLException {
+        if (studentid < 0||standardid<0) {
+            return "error";
+        }else{
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT insert_exam("+studentid+","+standardid+")");
+            if(rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
 }
