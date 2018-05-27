@@ -53,7 +53,7 @@ public class StandardsController {
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_standard("+one+","+two+","+three+","+four+","+five+
+            ResultSet rs = stm.executeQuery("SELECT insert_standard('"+name+"',"+one+","+two+","+three+","+four+","+five+
                     ",'"+measure+"','"+sex+"')");
             if (rs.next()) {
                 String massage;
@@ -80,7 +80,7 @@ public class StandardsController {
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_standard("+id+","+one+","+two+","+three+","+four+","+five+
+            ResultSet rs = stm.executeQuery("SELECT update_standard("+id+",'"+name+"',"+one+","+two+","+three+","+four+","+five+
                     ",'"+measure+"','"+sex+"')");
             if (rs.next()) {
                 String massage;
