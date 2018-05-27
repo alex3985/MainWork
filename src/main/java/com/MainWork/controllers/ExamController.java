@@ -57,7 +57,7 @@ public class ExamController {
             con.close();
             return "error";
         }else{
-            LinkedList<ResultOfExamForCoach> exam = new LinkedList<>();
+            LinkedList<ResultOfExamForCoach> exam = new LinkedList<ResultOfExamForCoach>();
             do{
                 exam.add(new ResultOfExamForCoach(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDouble(8),rs.getDouble(5),
                         rs.getDouble(6),rs.getDouble(7),rs.getDouble(4)));
