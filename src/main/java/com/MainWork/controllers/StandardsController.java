@@ -20,6 +20,29 @@ public class StandardsController {
     @Autowired
     private DataSource dataSource;
 
+    @RequestMapping("/student/")
+    public Object getStundardsBySex() throws SQLException {
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("SELECT * FROM public.standards");
+        if(!rs.next()){
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }else{
+            LinkedList<Standard> standards = new LinkedList<>();
+            do{
+                standards.add(new Standard(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getDouble(4),
+                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8)));
+            }while (rs.next());
+            rs.close();
+            stm.close();
+            con.close();
+            return standards;
+        }
+    }
+
     @RequestMapping("/student/{sex}/{id}")
     public Object getStundardsBySex(@PathVariable(value = "sex") String sex,@PathVariable(value = "id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
