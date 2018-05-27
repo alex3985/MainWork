@@ -1,6 +1,7 @@
 package com.MainWork.controllers;
 
 import com.MainWork.modules.exam.ResultOfExam;
+import com.MainWork.modules.exam.ResultOfExamForCoach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,30 @@ public class ExamController {
             do{
                 exam.add(new ResultOfExam(rs.getString(1),rs.getString(2),rs.getDouble(7),rs.getDouble(4),
                         rs.getDouble(5),rs.getDouble(6),rs.getDouble(3)));
+            }while (rs.next());
+            rs.close();
+            stm.close();
+            con.close();
+            return exam;
+        }
+    }
+
+    @RequestMapping("/coach/{id}")
+    public Object getExamsByIdForCoach(@PathVariable(value = "id") int id) throws SQLException {
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("SELECT name,measure,five,two,three,four,data FROM public.standards INNER JOIN " +
+                "public.exam ON public.standards.standardid=public.exam.standardid WHERE public.exam.studentid="+id);
+        if(!rs.next()){
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }else{
+            LinkedList<ResultOfExamForCoach> exam = new LinkedList<>();
+            do{
+                exam.add(new ResultOfExamForCoach(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDouble(8),rs.getDouble(5),
+                        rs.getDouble(6),rs.getDouble(7),rs.getDouble(4)));
             }while (rs.next());
             rs.close();
             stm.close();
