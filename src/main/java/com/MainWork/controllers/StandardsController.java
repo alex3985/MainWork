@@ -43,4 +43,81 @@ public class StandardsController {
         }
     }
 
+    @RequestMapping("/admin/insert/{name}/{one}/{two}/{three}/{four}/{five}/{measure}/{sex}")
+    public String insertStandard(@PathVariable("name") String name,@PathVariable("one") double one,
+                                 @PathVariable("two") double two,@PathVariable("three") double three,@PathVariable("four") double four,
+                                 @PathVariable("five") double five,@PathVariable("maesure") String measure,@PathVariable("sex") String sex) throws SQLException {
+        if(name.isEmpty()||name.equals("")||one<=0||two<=0||three<=0||four<=0||five<=0||measure.isEmpty()||
+                measure.equals("")||sex.isEmpty()||sex.equals("")){
+            return "error";
+        }else{
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT update_standard("+one+","+two+","+three+","+four+","+five+
+                    ",'"+measure+"','"+sex+"')");
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
+
+    @RequestMapping("/admin/update/{id}/{name}/{one}/{two}/{three}/{four}/{five}/{measure}/{sex}")
+    public String updateStandard(@PathVariable("id") int id,@PathVariable("name") String name,@PathVariable("one") double one,
+                                 @PathVariable("two") double two,@PathVariable("three") double three,@PathVariable("four") double four,
+                                 @PathVariable("five") double five,@PathVariable("maesure") String measure,@PathVariable("sex") String sex) throws SQLException {
+        if(id<=0||name.isEmpty()||name.equals("")||one<=0||two<=0||three<=0||four<=0||five<=0||measure.isEmpty()||
+                measure.equals("")||sex.isEmpty()||sex.equals("")){
+            return "error";
+        }else{
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT update_standard("+id+","+one+","+two+","+three+","+four+","+five+
+                    ",'"+measure+"','"+sex+"')");
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
+
+    @RequestMapping("/admin/delete/{id}")
+    public String deleteStandard(@PathVariable("id") int id) throws SQLException {
+        if(id<=0){
+            return "error";
+        }else {
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT delete_standard("+id+")");
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
+
 }
