@@ -20,7 +20,7 @@ public class StandardsController {
     @Autowired
     private DataSource dataSource;
 
-    @RequestMapping("/student/")
+    @RequestMapping("/")
     public Object getStundardsBySex() throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
@@ -34,7 +34,7 @@ public class StandardsController {
             LinkedList<Standard> standards = new LinkedList<>();
             do{
                 standards.add(new Standard(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getDouble(4),
-                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8)));
+                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8),rs.getString(9)));
             }while (rs.next());
             rs.close();
             stm.close();

@@ -9,6 +9,7 @@ public class Standard {
     private double four;
     private double five;
     private String measure;
+    private String sex;
 
     public Standard(int id, String name, double one, double two, double three, double four, double five, String measure) {
         this.id = id;
@@ -19,6 +20,26 @@ public class Standard {
         this.four = four;
         this.five = five;
         this.measure = measure;
+    }
+
+    public Standard(int id, String name, double one, double two, double three, double four, double five, String measure, String sex) {
+        this.id = id;
+        this.name = name;
+        this.one = one;
+        this.two = two;
+        this.three = three;
+        this.four = four;
+        this.five = five;
+        this.measure = measure;
+        this.sex = sex;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public int getId() {
