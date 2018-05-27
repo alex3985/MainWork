@@ -2,6 +2,7 @@ package com.MainWork.controllers;
 
 import com.MainWork.modules.faculty.Faculty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +36,75 @@ public class FacultyController {
             stm.close();
             con.close();
             return faculties;
+        }
+    }
+
+    @RequestMapping("/admin/insert/{name}")
+    public String insertFaculty(@PathVariable("name") String name) throws SQLException {
+        if(name.isEmpty()||name.equals("")){
+            return "error";
+        }else {
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT insert_faculty('"+name+"')");
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
+
+    @RequestMapping("/admin/update/{name}/{id}")
+    public String updateFaculty(@PathVariable("name") String name,@PathVariable("id") int id) throws SQLException {
+        if(id<=0||name.isEmpty()||name.equals("")){
+            return "error";
+        }else {
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT update_faculty("+id+",'"+name+"')");
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
+    }
+
+    @RequestMapping("/admin/delete/{id}")
+    public String deleteFaculty(@PathVariable("id") int id) throws SQLException {
+        if(id<=0){
+            return "error";
+        }else {
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT delete_faculty("+id+")");
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
         }
     }
 }

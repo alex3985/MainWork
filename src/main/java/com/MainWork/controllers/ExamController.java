@@ -72,7 +72,7 @@ public class ExamController {
     @RequestMapping("/coach/insert/{studentid}/{standardid}/{data}")
     public String insertExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid,
                              @PathVariable(value = "data") double data) throws SQLException {
-        if (studentid < 0||standardid<0||data<0) {
+        if (studentid <= 0||standardid<=0||data<=0) {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
@@ -96,7 +96,7 @@ public class ExamController {
     @RequestMapping("/coach/update/{studentid}/{standardid}/{data}")
     public String updateExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid,
                              @PathVariable(value = "data") double data) throws SQLException {
-        if (studentid < 0||standardid<0||data<0) {
+        if (studentid <=0||standardid<=0||data<=0) {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
@@ -119,7 +119,7 @@ public class ExamController {
 
     @RequestMapping("/coach/delete/{studentid}/{standardid}")
     public String deleteExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid) throws SQLException {
-        if (studentid < 0||standardid<0) {
+        if (studentid <=0||standardid<=0) {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
