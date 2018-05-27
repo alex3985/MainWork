@@ -49,7 +49,7 @@ public class ExamController {
     public Object getExamsByIdForCoach(@PathVariable(value = "id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT name,measure,five,two,three,four,data FROM public.standards INNER JOIN " +
+        ResultSet rs = stm.executeQuery("SELECT  standards.standardid,name,measure,five,two,three,four,data FROM public.standards INNER JOIN " +
                 "public.exam ON public.standards.standardid=public.exam.standardid WHERE public.exam.studentid="+id);
         if(!rs.next()){
             rs.close();
