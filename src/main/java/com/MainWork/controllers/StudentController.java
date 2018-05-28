@@ -67,7 +67,7 @@ public class StudentController {
 
     @RequestMapping("/insert/{faculty}/{coachid}/{sectionid}/{namestd}/{surname}/{patronymic}/{group}/{sex}/{phone}")
     public String insertStudent(@PathVariable(value = "faculty") int faculty,@PathVariable(value = "coachid") int coachid,@PathVariable(value = "sectionid") int sectionid,@PathVariable(value = "namestd") String namestd,@PathVariable(value = "surname") String surname,@PathVariable(value = "patronymic") String patronymic,@PathVariable(value = "group") String group,@PathVariable(value = "sex") String sex,@PathVariable(value = "phone") String phone) throws SQLException {
-        if(faculty<0||coachid<0||sectionid<0||namestd.equals("")||surname.equals("")||patronymic.equals("")||group.equals("")||sex.equals(""))
+        if(faculty<=0||coachid<=0||sectionid<=0||namestd.equals("")||surname.equals("")||patronymic.equals("")||group.equals("")||sex.equals(""))
         {
             return "error";
         }else{
@@ -86,7 +86,7 @@ public class StudentController {
 
     @RequestMapping("/delete/{id}")
     public String deleteStudent(@PathVariable(value = "id") int id) throws SQLException {
-        if(id<0)
+        if(id<=0)
         {
             return "error";
         }else{
@@ -104,7 +104,7 @@ public class StudentController {
 
     @RequestMapping("/update/{studentid}/{faculty}/{namestd}/{surname}/{patronymic}/{group}/{sex}/{phone}")
     public String updateStudent(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "faculty") int faculty,@PathVariable(value = "namestd") String namestd,@PathVariable(value = "surname") String surname,@PathVariable(value = "patronymic") String patronymic,@PathVariable(value = "group") String group,@PathVariable(value = "sex") String sex,@PathVariable(value = "phone") String phone) throws SQLException {
-        if(faculty<0||studentid<0||namestd.equals("")||surname.equals("")||patronymic.equals("")||group.equals("")||sex.equals(""))
+        if(faculty<=0||studentid<=0||namestd.equals("")||surname.equals("")||patronymic.equals("")||group.equals("")||sex.equals(""))
         {
             return "error";
         }else{
@@ -119,4 +119,5 @@ public class StudentController {
             return massage ;
         }
     }
+
 }
