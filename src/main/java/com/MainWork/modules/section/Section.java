@@ -1,16 +1,30 @@
 package com.MainWork.modules.section;
 
 public class Section {
+    private int id;
     private String section;
     private String name;
     private String surname;
     private String patronomic;
+
+    public Section(int id, String section) {
+        this.id = id;
+        this.section = section;
+    }
 
     public Section(String section, String name, String surname, String patronomic) {
         this.section = section;
         this.name = name;
         this.surname = surname;
         this.patronomic = patronomic;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSection() {
