@@ -263,7 +263,7 @@ public class UserController {
     public Object showAdmins() throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM public.admin");
+        ResultSet rs = stm.executeQuery("SELECT public.admin.adminid,public.admin.name,public.users.login,public.users.password FROM public.admin INNER JOIN public.users ON admin.adminid = users.adminid");
         if (rs.next()) {
             LinkedList<Admin> admin = new LinkedList<>();
             do{
