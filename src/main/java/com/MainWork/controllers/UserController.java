@@ -1,5 +1,6 @@
 package com.MainWork.controllers;
 
+import com.MainWork.modules.admin.CoachForAdmin;
 import com.MainWork.modules.admin.StudentForAdmin;
 import com.MainWork.modules.authorization.User;
 import com.MainWork.modules.users.Admin;
@@ -280,6 +281,27 @@ public class UserController {
         return "error";
     }
 
+    @RequestMapping("/coaches")
+    public Object showCoach() throws SQLException {
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("SELECT coach.coachid,coach.sectionid,surname, coach.name,patronomic,section.name, users.login,users.password FROM coach INNER JOIN users ON coach.coachid = users.coachid INNER JOIN section ON coach.sectionid = section.sectionid");
+        if (rs.next()) {
+            LinkedList<CoachForAdmin> admin = new LinkedList<>();
+            do{
+                admin.add(new CoachForAdmin(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),
+                        rs.getString(7),rs.getString(8))) ;
+            }while(rs.next());
+            rs.close();
+            stm.close();
+            con.close();
+            return admin;
+        }
+        rs.close();
+        stm.close();
+        con.close();
+        return "error";
+    }
 
 
 }
