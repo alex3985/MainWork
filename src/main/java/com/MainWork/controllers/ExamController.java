@@ -93,15 +93,15 @@ public class ExamController {
         }
     }
 
-    @RequestMapping("/coach/update/{studentid}/{standardid}/{data}")
+    @RequestMapping("/coach/update/{studentid}/{standardid}/{oldstandard}/{data}")
     public String updateExam(@PathVariable(value = "studentid") int studentid,@PathVariable(value = "standardid") int standardid,
-                             @PathVariable(value = "data") double data) throws SQLException {
-        if (studentid <=0||standardid<=0||data<=0) {
+                             @PathVariable(value = "oldstandard") int standard,@PathVariable(value = "data") double data) throws SQLException {
+        if (studentid <=0||standardid<=0||data<=0||standard<=0) {
             return "error";
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_exam("+studentid+","+standardid+","+data+")");
+            ResultSet rs = stm.executeQuery("SELECT update_exam("+studentid+","+standardid+","+standard+","+data+")");
             if(rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
