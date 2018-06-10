@@ -20,23 +20,26 @@ public class ScheduleController {
     @Autowired
     private DataSource dataSource;
 
-    @RequestMapping("/")
-    public Object getAllSchedule() throws SQLException {
-        Connection con = dataSource.getConnection();
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM public.schedule");
-        if(!rs.next()) {
+    @RequestMapping("/{id}")
+    public Object getAllScheduleByCoach(@PathVariable(value = "id") int id) throws SQLException {
+        if(id<=0) {
             return "error";
-        }
-        else{
-            LinkedList<Schedule> schedules = new LinkedList<>();
-            do{
-                schedules.add(new Schedule(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4)));
-            }while (rs.next());
-            rs.close();
-            stm.close();
-            con.close();
-            return schedules;
+        }else {
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM public.schedule");
+            if (!rs.next()) {
+                return "error";
+            } else {
+                LinkedList<Schedule> schedules = new LinkedList<>();
+                do {
+                    schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4),rs.getString(5)));
+                } while (rs.next());
+                rs.close();
+                stm.close();
+                con.close();
+                return schedules;
+            }
         }
 
     }

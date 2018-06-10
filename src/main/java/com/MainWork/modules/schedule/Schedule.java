@@ -2,15 +2,17 @@ package com.MainWork.modules.schedule;
 
 public class Schedule {
     private int id;
-    private int coachid;
     private int dayid;
+    private String day;
     private int timeid;
+    private String time;
 
-    public Schedule(int id, int coachid, int dayid, int timeid) {
+    public Schedule(int id, int dayid, String day, int timeid, String time) {
         this.id = id;
-        this.coachid = coachid;
         this.dayid = dayid;
+        this.day = day;
         this.timeid = timeid;
+        this.time = time;
     }
 
     public int getId() {
@@ -21,14 +23,6 @@ public class Schedule {
         this.id = id;
     }
 
-    public int getCoachid() {
-        return coachid;
-    }
-
-    public void setCoachid(int coachid) {
-        this.coachid = coachid;
-    }
-
     public int getDayid() {
         return dayid;
     }
@@ -37,11 +31,27 @@ public class Schedule {
         this.dayid = dayid;
     }
 
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
     public int getTimeid() {
         return timeid;
     }
 
     public void setTimeid(int timeid) {
         this.timeid = timeid;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
