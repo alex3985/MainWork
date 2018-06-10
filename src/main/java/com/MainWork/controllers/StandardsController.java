@@ -70,7 +70,7 @@ public class StandardsController {
     public Object getStundardById(@PathVariable(value = "id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT public.standards.standardid,name,one,two,three,four,five,measure FROM public.standards WHERE standardid="+id+")");
+        ResultSet rs = stm.executeQuery("SELECT public.standards.standardid,name,one,two,three,four,five,measure FROM public.standards WHERE standardid="+id);
         if(!rs.next()){
             rs.close();
             stm.close();
