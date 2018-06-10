@@ -66,8 +66,8 @@ public class StandardsController {
         }
     }
 
-    @RequestMapping("/{id}/{sex}")
-    public Object getStundardById(@PathVariable(value = "sex") String sex,@PathVariable(value = "id") int id) throws SQLException {
+    @RequestMapping("/{id}")
+    public Object getStundardById(@PathVariable(value = "id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT public.standards.standardid,name,one,two,three,four,five,measure FROM public.standards WHERE standardid="+id+")");
