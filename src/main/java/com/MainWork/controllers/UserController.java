@@ -50,12 +50,18 @@ public class UserController {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT public.insert_user_student(" + studentid + ",'" + login + "','" + password + "')");
-            rs.next();
-            String massage = rs.getString(1);
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
             rs.close();
             stm.close();
             con.close();
-            return massage;
+            return "error";
         }
     }
 
@@ -67,12 +73,18 @@ public class UserController {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT public.update_user_student(" + studentid + ",'" + login + "','" + password + "')");
-            rs.next();
-            String massage = rs.getString(1);
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
             rs.close();
             stm.close();
             con.close();
-            return massage;
+            return "error";
         }
     }
 
@@ -84,12 +96,18 @@ public class UserController {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT public.delete_user_student(" + studentid + ")");
-            rs.next();
-            String massage = rs.getString(1);
+            if (rs.next()) {
+                String massage;
+                massage = new String(rs.getString(1));
+                rs.close();
+                stm.close();
+                con.close();
+                return massage;
+            }
             rs.close();
             stm.close();
             con.close();
-            return massage;
+            return "error";
         }
     }
 
