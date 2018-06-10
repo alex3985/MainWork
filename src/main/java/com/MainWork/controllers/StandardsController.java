@@ -78,7 +78,7 @@ public class StandardsController {
             return "error";
         }else{
             Standard standard = new Standard(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getDouble(4),
-                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8)));
+                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8));
             rs.close();
             stm.close();
             con.close();
