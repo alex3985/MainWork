@@ -66,6 +66,26 @@ public class StandardsController {
         }
     }
 
+    @RequestMapping("/student/{id}/{sex}")
+    public Object getStundardById(@PathVariable(value = "sex") String sex,@PathVariable(value = "id") int id) throws SQLException {
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("SELECT public.standards.standardid,name,one,two,three,four,five,measure FROM public.standards WHERE standardid="+id+")");
+        if(!rs.next()){
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }else{
+            Standard standard = new Standard(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getDouble(4),
+                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8)));
+            rs.close();
+            stm.close();
+            con.close();
+            return standard;
+        }
+    }
+
     @RequestMapping("/admin/insert/{name}/{one}/{two}/{three}/{four}/{five}/{measure}/{sex}")
     public String insertStandard(@PathVariable("name") String name,@PathVariable("one") double one,
                                  @PathVariable("two") double two,@PathVariable("three") double three,@PathVariable("four") double four,
@@ -142,5 +162,7 @@ public class StandardsController {
             return "error";
         }
     }
+
+
 
 }
