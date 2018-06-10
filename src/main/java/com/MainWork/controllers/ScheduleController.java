@@ -27,7 +27,7 @@ public class ScheduleController {
         }else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM public.schedule");
+            ResultSet rs = stm.executeQuery("SELECT scheduleid,schedule.dayid,day.name,schedule.timeid,time.time FROM public.schedule INNER join day ON schedule.dayid = day.dayid INNER JOIN time ON schedule.timeid = time.timeid");
             if (!rs.next()) {
                 return "error";
             } else {
@@ -110,7 +110,6 @@ public class ScheduleController {
             stm.close();
             con.close();
             return "error";
-        }
         }
     }
 }
