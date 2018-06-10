@@ -66,7 +66,7 @@ public class StandardsController {
         }
     }
 
-    @RequestMapping("/student/{id}/{sex}")
+    @RequestMapping("/{id}/{sex}")
     public Object getStundardById(@PathVariable(value = "sex") String sex,@PathVariable(value = "id") int id) throws SQLException {
         Connection con = dataSource.getConnection();
         Statement stm = con.createStatement();
