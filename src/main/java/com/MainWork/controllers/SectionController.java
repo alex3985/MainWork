@@ -27,6 +27,9 @@ public class SectionController {
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM public.section");
         if(!rs.next()){
+            rs.close();
+            stm.close();
+            con.close();
             return "error";
         }else{
             LinkedList<Section> sections = new LinkedList<>();

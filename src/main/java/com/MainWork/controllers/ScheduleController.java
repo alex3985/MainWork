@@ -29,6 +29,9 @@ public class ScheduleController {
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT scheduleid,schedule.dayid,day.name,schedule.timeid,time.time FROM public.schedule INNER join day ON schedule.dayid = day.dayid INNER JOIN time ON schedule.timeid = time.timeid WHERE coachid="+id);
             if (!rs.next()) {
+                rs.close();
+                stm.close();
+                con.close();
                 return "error";
             } else {
                 LinkedList<Schedule> schedules = new LinkedList<>();
@@ -54,6 +57,9 @@ public class ScheduleController {
             ResultSet rs = stm.executeQuery("SELECT scheduleid,schedule.dayid,day.name,schedule.timeid,time.time FROM public.schedule INNER join day ON schedule.dayid = day.dayid INNER JOIN time ON schedule.timeid = time.timeid WHERE coachid IN (SELECT " +
                     "coachid FROM journal WHERE studentid="+id+")");
             if (!rs.next()) {
+                rs.close();
+                stm.close();
+                con.close();
                 return "error";
             } else {
                 LinkedList<Schedule> schedules = new LinkedList<>();

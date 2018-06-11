@@ -26,6 +26,9 @@ public class FacultyController {
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM public.\"Faculty\"");
         if(!rs.next()){
+            rs.close();
+            stm.close();
+            con.close();
             return "error";
         }else{
             LinkedList<Faculty> faculties = new LinkedList<>();

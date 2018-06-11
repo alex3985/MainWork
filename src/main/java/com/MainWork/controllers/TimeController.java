@@ -25,6 +25,9 @@ public class TimeController {
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM public.time");
         if(!rs.next()){
+            rs.close();
+            stm.close();
+            con.close();
             return "error";
         }else{
             LinkedList<Time> times = new LinkedList<>();
