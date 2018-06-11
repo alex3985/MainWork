@@ -27,7 +27,32 @@ public class ScheduleController {
         }else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT scheduleid,schedule.dayid,day.name,schedule.timeid,time.time FROM public.schedule INNER join day ON schedule.dayid = day.dayid INNER JOIN time ON schedule.timeid = time.timeid");
+            ResultSet rs = stm.executeQuery("SELECT scheduleid,schedule.dayid,day.name,schedule.timeid,time.time FROM public.schedule INNER join day ON schedule.dayid = day.dayid INNER JOIN time ON schedule.timeid = time.timeid WHERE coachid="+id);
+            if (!rs.next()) {
+                return "error";
+            } else {
+                LinkedList<Schedule> schedules = new LinkedList<>();
+                do {
+                    schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4),rs.getString(5)));
+                } while (rs.next());
+                rs.close();
+                stm.close();
+                con.close();
+                return schedules;
+            }
+        }
+
+    }
+
+    @RequestMapping("/student/{id}")
+    public Object getAllScheduleByStudent(@PathVariable(value = "id") int id) throws SQLException {
+        if(id<=0) {
+            return "error";
+        }else {
+            Connection con = dataSource.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT scheduleid,schedule.dayid,day.name,schedule.timeid,time.time FROM public.schedule INNER join day ON schedule.dayid = day.dayid INNER JOIN time ON schedule.timeid = time.timeid WHERE coachid IN (SELECT " +
+                    "coachid FROM journal WHERE studentid="+id+")");
             if (!rs.next()) {
                 return "error";
             } else {
