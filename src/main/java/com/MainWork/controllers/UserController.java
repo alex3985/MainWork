@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.*;
 import java.util.LinkedList;
 
@@ -132,13 +134,13 @@ public class UserController {
 
     @RequestMapping("/admin/insert/{name}/{login}/{password}")
     public String insertAdmin(@PathVariable("name") String name, @PathVariable("login") String login,
-                              @PathVariable("password") String password) throws SQLException {
+                              @PathVariable("password") String password) throws SQLException, UnsupportedEncodingException {
         if (name.isEmpty() || name.equals("") || login.isEmpty() || login.equals("") || password.equals("") || password.isEmpty()) {
             return "error";
         } else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_admin('" + name + "','" + login + "','" + password + "')");
+            ResultSet rs = stm.executeQuery("SELECT insert_admin('" + URLDecoder.decode(name,"UTF-8") + "','" + login + "','" + password + "')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
@@ -156,13 +158,13 @@ public class UserController {
 
     @RequestMapping("/admin/update/{id}/{name}/{login}/{password}")
     public String updateAdmin(@PathVariable("id") int id, @PathVariable("name") String name, @PathVariable("login") String login,
-                              @PathVariable("password") String password) throws SQLException {
+                              @PathVariable("password") String password) throws SQLException, UnsupportedEncodingException {
         if (id <= 0 || name.isEmpty() || name.equals("") || login.isEmpty() || login.equals("") || password.equals("") || password.isEmpty()) {
             return "error";
         } else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_admin(" + id + ",'" + name + "','" + login + "','" + password + "')");
+            ResultSet rs = stm.executeQuery("SELECT update_admin(" + id + ",'" +URLDecoder.decode( name,"UTF-8") + "','" + login + "','" + password + "')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
@@ -227,14 +229,14 @@ public class UserController {
     @RequestMapping("/admin/coach/insert/{id}/{sectionid}/{name}/{surname}/{patronymic}/{login}/{password}")
     public String insertCoach(@PathVariable("id") int id, @PathVariable("name") String name, @PathVariable("surname") String surname,
                               @PathVariable("patronymic") String patronymic, @PathVariable("login") String login,
-                              @PathVariable("password") String password, @PathVariable("sectionid") int sectionid) throws SQLException {
+                              @PathVariable("password") String password, @PathVariable("sectionid") int sectionid) throws SQLException, UnsupportedEncodingException {
         if (id <= 0 || name.isEmpty() || name.equals("") || login.isEmpty() || login.equals("") || password.equals("") || password.isEmpty() ||
                 surname.equals("") || surname.isEmpty() || patronymic.isEmpty() || patronymic.equals("")) {
             return "error";
         } else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_coach(" + id + ",'" + name + "','" + surname + "','" + patronymic + "','" + login + "','" + password + "')");
+            ResultSet rs = stm.executeQuery("SELECT insert_coach(" + id + ",'" + URLDecoder.decode(name,"UTF-8") + "','" + URLDecoder.decode(surname,"UTF-8") + "','" + URLDecoder.decode(patronymic,"UTF-8" )+ "','" + login + "','" + password + "')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
@@ -253,14 +255,14 @@ public class UserController {
     @RequestMapping("/admin/coach/update/{id}/{sectionid}/{name}/{surname}/{patronymic}/{login}/{password}")
     public String updateCoach(@PathVariable("id") int id, @PathVariable("name") String name, @PathVariable("surname") String surname,
                               @PathVariable("patronymic") String patronymic, @PathVariable("login") String login,
-                              @PathVariable("password") String password, @PathVariable("sectionid") int sectionid) throws SQLException {
+                              @PathVariable("password") String password, @PathVariable("sectionid") int sectionid) throws SQLException, UnsupportedEncodingException {
         if (id <= 0 || name.isEmpty() || name.equals("") || login.isEmpty() || login.equals("") || password.equals("") || password.isEmpty() ||
                 surname.equals("") || surname.isEmpty() || patronymic.isEmpty() || patronymic.equals("")) {
             return "error";
         } else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_coach(" + id + "," + sectionid + ",'" + name + "','" + surname + "','" + patronymic + "','" + login + "','" + password + "')");
+            ResultSet rs = stm.executeQuery("SELECT update_coach(" + id + "," + sectionid + ",'" + URLDecoder.decode(name,"UTF-8") + "','" + URLDecoder.decode(surname,"UTF-8") + "','" + URLDecoder.decode(patronymic,"UTF-8") + "','" + login + "','" + password + "')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));

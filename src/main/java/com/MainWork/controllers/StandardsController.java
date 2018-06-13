@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,15 +91,15 @@ public class StandardsController {
     @RequestMapping("/admin/insert/{name}/{one}/{two}/{three}/{four}/{five}/{measure}/{sex}")
     public String insertStandard(@PathVariable("name") String name,@PathVariable("one") double one,
                                  @PathVariable("two") double two,@PathVariable("three") double three,@PathVariable("four") double four,
-                                 @PathVariable("five") double five,@PathVariable("measure") String measure,@PathVariable("sex") String sex) throws SQLException {
+                                 @PathVariable("five") double five,@PathVariable("measure") String measure,@PathVariable("sex") String sex) throws SQLException, UnsupportedEncodingException {
         if(name.isEmpty()||name.equals("")||one<=0||two<=0||three<=0||four<=0||five<=0||measure.isEmpty()||
                 measure.equals("")||sex.isEmpty()||sex.equals("")){
             return "error";
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_standard('"+name+"',"+one+","+two+","+three+","+four+","+five+
-                    ",'"+measure+"','"+sex+"')");
+            ResultSet rs = stm.executeQuery("SELECT insert_standard('"+ URLDecoder.decode(name,"UTF-8")+"',"+one+","+two+","+three+","+four+","+five+
+                    ",'"+URLDecoder.decode(measure,"UTF-8")+"','"+sex+"')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
@@ -116,15 +118,15 @@ public class StandardsController {
     @RequestMapping("/admin/update/{id}/{name}/{one}/{two}/{three}/{four}/{five}/{measure}/{sex}")
     public String updateStandard(@PathVariable("id") int id,@PathVariable("name") String name,@PathVariable("one") double one,
                                  @PathVariable("two") double two,@PathVariable("three") double three,@PathVariable("four") double four,
-                                 @PathVariable("five") double five,@PathVariable("measure") String measure,@PathVariable("sex") String sex) throws SQLException {
+                                 @PathVariable("five") double five,@PathVariable("measure") String measure,@PathVariable("sex") String sex) throws SQLException, UnsupportedEncodingException {
         if(id<=0||name.isEmpty()||name.equals("")||one<=0||two<=0||three<=0||four<=0||five<=0||measure.isEmpty()||
                 measure.equals("")||sex.isEmpty()||sex.equals("")){
             return "error";
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_standard("+id+",'"+name+"',"+one+","+two+","+three+","+four+","+five+
-                    ",'"+measure+"','"+sex+"')");
+            ResultSet rs = stm.executeQuery("SELECT update_standard("+id+",'"+URLDecoder.decode(name,"UTF-8")+"',"+one+","+two+","+three+","+four+","+five+
+                    ",'"+URLDecoder.decode(measure,"UTF-8")+"','"+sex+"')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));

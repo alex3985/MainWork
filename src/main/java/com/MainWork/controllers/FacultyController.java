@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,13 +45,13 @@ public class FacultyController {
     }
 
     @RequestMapping("/admin/insert/{name}")
-    public String insertFaculty(@PathVariable("name") String name) throws SQLException {
+    public String insertFaculty(@PathVariable("name") String name) throws SQLException, UnsupportedEncodingException {
         if(name.isEmpty()||name.equals("")){
             return "error";
         }else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_faculty('"+name+"')");
+            ResultSet rs = stm.executeQuery("SELECT insert_faculty('"+ URLDecoder.decode(name,"UTF-8")+"')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
@@ -66,13 +68,13 @@ public class FacultyController {
     }
 
     @RequestMapping("/admin/update/{name}/{id}")
-    public String updateFaculty(@PathVariable("name") String name,@PathVariable("id") int id) throws SQLException {
+    public String updateFaculty(@PathVariable("name") String name,@PathVariable("id") int id) throws SQLException, UnsupportedEncodingException {
         if(id<=0||name.isEmpty()||name.equals("")){
             return "error";
         }else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_faculty("+id+",'"+name+"')");
+            ResultSet rs = stm.executeQuery("SELECT update_faculty("+id+",'"+URLDecoder.decode(name,"UTF-8")+"')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));

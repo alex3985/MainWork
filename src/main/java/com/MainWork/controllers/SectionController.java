@@ -69,13 +69,13 @@ public class SectionController {
     }
 
     @RequestMapping("/admin/update/{name}/{id}")
-    public String updateSection(@PathVariable("name") String name,@PathVariable("id") int id) throws SQLException {
+    public String updateSection(@PathVariable("name") String name,@PathVariable("id") int id) throws SQLException, UnsupportedEncodingException {
         if(id<=0||name.isEmpty()||name.equals("")){
             return "error";
         }else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT update_section("+id+",'"+name+"')");
+            ResultSet rs = stm.executeQuery("SELECT update_section("+id+",'"+ URLDecoder.decode(name,"UTF-8")+"')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
