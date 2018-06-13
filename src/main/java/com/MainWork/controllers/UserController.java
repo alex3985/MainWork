@@ -187,7 +187,7 @@ public class UserController {
 
     @RequestMapping("/admin/delete/{id}")
     public String deleteAdmin(@PathVariable("id") int id) throws SQLException {
-        if (id <= 0) {
+        if (id <= 0||id==1) {
             return "error";
         } else {
             Connection con = dataSource.getConnection();
