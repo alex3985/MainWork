@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.MainWork.modules.section.Section;
 import javax.sql.DataSource;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,13 +46,13 @@ public class SectionController {
     }
 
     @RequestMapping("/admin/insert/{name}")
-    public String insertSection(@PathVariable("name") String name) throws SQLException {
+    public String insertSection(@PathVariable("name") String name) throws SQLException, UnsupportedEncodingException {
         if(name.isEmpty()||name.equals("")){
             return "error";
         }else {
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT insert_section('"+name+"')");
+            ResultSet rs = stm.executeQuery("SELECT insert_section('"+ URLDecoder.decode(name,"UTF-8")+"')");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
