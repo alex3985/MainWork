@@ -120,7 +120,12 @@ public class UserController {
         ResultSet rs = stm.executeQuery("SELECT student.studentid,student.surname,student.name,student.patronymic,public.\"Faculty\".name, student.grou, section.name, foo.surname,foo.name,foo.patronomic,users.login,users.password FROM student\n" +
                 "  INNER JOIN (Select journal.studentid,journal.sectionid,coach.name,coach.patronomic,coach.surname FROM coach INNER JOIN journal ON coach.coachid = journal.coachid) AS foo ON student.studentid=foo.studentid INNER JOIN public.\"Faculty\"\n" +
                 "    ON student.facultyid=public.\"Faculty\".facultyid INNER JOIN section ON foo.sectionid=section.sectionid LEFT OUTER JOIN users ON student.studentid = users.studentid;");
-        rs.next();
+        if(!rs.next()){
+            rs.close();
+            stm.close();
+            con.close();
+            return "error";
+        }
         LinkedList<StudentForAdmin> students = new LinkedList<>();
         do {
             students.add(new StudentForAdmin(rs.getInt(1), rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4), rs.getString(5), rs.getString(6),
