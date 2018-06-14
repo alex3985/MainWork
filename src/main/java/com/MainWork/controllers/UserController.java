@@ -231,10 +231,10 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/admin/coach/insert/{id}/{sectionid}/{name}/{surname}/{patronymic}/{login}/{password}")
+    @RequestMapping("/admin/coach/insert/{id}/{name}/{surname}/{patronymic}/{login}/{password}")
     public String insertCoach(@PathVariable("id") int id, @PathVariable("name") String name, @PathVariable("surname") String surname,
                               @PathVariable("patronymic") String patronymic, @PathVariable("login") String login,
-                              @PathVariable("password") String password, @PathVariable("sectionid") int sectionid) throws SQLException, UnsupportedEncodingException {
+                              @PathVariable("password") String password) throws SQLException, UnsupportedEncodingException {
         if (id <= 0 || name.isEmpty() || name.equals("") || login.isEmpty() || login.equals("") || password.equals("") || password.isEmpty() ||
                 surname.equals("") || surname.isEmpty() || patronymic.isEmpty() || patronymic.equals("")) {
             return "error";
