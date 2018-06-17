@@ -128,7 +128,7 @@ public class ScheduleController {
         }else{
             Connection con = dataSource.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT public.update_schedule(" + id +")");
+            ResultSet rs = stm.executeQuery("SELECT public.delete_schedule(" + id +")");
             if (rs.next()) {
                 String massage;
                 massage = new String(rs.getString(1));
