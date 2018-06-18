@@ -328,5 +328,19 @@ public class UserController {
         return "error";
     }
 
+    @RequestMapping("/logincheck/{login}")
+    public Object logincheck(@PathVariable("login") String login) throws SQLException {
+        Connection con = dataSource.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("SELECT * FROM public.users WHERE login=" + "'" + login + "'");
+        if(rs.next()){
+            String s = new String(rs.getString(1));
+            return s;
+        }
+        rs.close();
+        stm.close();
+        con.close();
+        return "error";
+    }
 
 }
